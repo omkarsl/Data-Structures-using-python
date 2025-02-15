@@ -1,0 +1,37 @@
+#Tower of hanoi
+
+class Node:  
+    def __init__(self, New_data, link=None):  
+        self.data = New_data  
+        self.next = link  
+
+class CreateSingly:  
+    def __init__(self):  
+        self.Head = None  
+
+    def create_list(self):  
+        if self.Head is None:  
+            self.Head = Node(int(input("Enter data for the first node: ")))  
+        current = self.Head  
+        while True:  
+            ch = input("Continue adding nodes? (y/n): ")  
+            if ch.upper() == 'Y':  
+                new_data = int(input("Enter data for the new node: "))  
+                current.next = Node(new_data)  
+                current = current.next  
+            else:  
+                current.next = None  
+                break  
+
+    def display(self):  
+        curNode = self.Head  
+        while curNode is not None:  
+            print(curNode.data, end=" --> ")  
+            curNode = curNode.next  
+        print("None")  
+
+
+head = CreateSingly()  
+head.create_list()  
+print("The list is:")  
+head.display()
