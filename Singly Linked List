@@ -1,0 +1,185 @@
+class Node:
+    def __init__(self, data=None, next_node=None):
+        self.data = data
+        self.next = next_node
+
+class SingleLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_end(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+
+    def insert_begin(self, data):
+        self.head = Node(data, self.head)
+
+    def insert_before_nth(self, data, position):
+        if position <= 1 or not self.head:
+            self.insert_begin(data)
+            return
+        
+        current = self.head
+        count = 1
+
+        while count < position - 1 and current.next:
+            current = current.next
+            count += 1
+
+        new_node = Node(data, current.next)
+        current.next = new_node
+
+    def insert_after_nth(self, data, position):
+        if not self.head:
+            self.insert_begin(data)
+            return
+        
+        current = self.head
+        count = 1
+
+        while count < position and current.next:
+            current = current.next
+            count += 1
+
+        current.next = Node(data, current.next)
+
+    def delete_first(self):
+        if not self.head:
+            print("Empty list. Deletion not possible")
+            return
+        
+        self.head = self.head.next
+        print("First node deleted successfully")
+
+    def delete_last(self):
+        if not self.head:
+            print("Empty list. Deletion not possible")
+            return
+        if not self.head.next:
+            self.head = None
+            print("Last node deleted successfully")
+            return
+        
+        current = self.head
+        while current.next and current.next.next:
+            current = current.next
+        
+        current.next = None
+        print("Last node deleted successfully")
+
+    def delete_anynode(self, value):
+        if not self.head:
+            print("Empty list. Deletion not possible")
+            return
+        
+        if self.head.data == value:
+            self.head = self.head.next
+            print(f"Node with value {value} deleted successfully")
+            return
+
+        current = self.head
+        while current.next and current.next.data != value:
+            current = current.next
+
+        if not current.next:
+            print(f"Node with value {value} not found")
+            return
+
+        current.next = current.next.next
+        print(f"Node with value {value} deleted successfully")
+
+    def display(self):
+        if not self.head:
+            print("Empty List")
+            return
+        
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+
+# Menu-driven interface
+linked_list = SingleLinkedList()
+
+while True:
+    print("\nSingle Linked List Operations")
+    print("1. Append to List")
+    print("2. Insert at Beginning")
+    print("3. Insert Before Nth Node")
+    print("4. Insert After Nth Node")
+    print("5. Delete First Node")
+    print("6. Delete Last Node")
+    print("7. Delete Node by Value")
+    print("8. Display List")
+    print("9. Exit")
+    
+    try:
+        choice = int(input("Enter your choice: "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue
+
+    if choice == 1:
+        while True:
+            try:
+                value = int(input("Enter the Data: "))
+                linked_list.insert_end(value)
+                more = input("Enter more (Y/N): ").strip().upper()
+                if more != 'Y':
+                    break
+            except ValueError:
+                print("Invalid input! Please enter an integer.")
+
+    elif choice == 2:
+        try:
+            value = int(input("Enter the Data: "))
+            linked_list.insert_begin(value)
+        except ValueError:
+            print("Invalid input! Please enter an integer.")
+
+    elif choice == 3:
+        try:
+            position = int(input("Enter the position: "))
+            value = int(input("Enter the data: "))
+            linked_list.insert_before_nth(value, position)
+        except ValueError:
+            print("Invalid input! Please enter an integer.")
+
+    elif choice == 4:
+        try:
+            position = int(input("Enter the position: "))
+            value = int(input("Enter the data: "))
+            linked_list.insert_after_nth(value, position)
+        except ValueError:
+            print("Invalid input! Please enter an integer.")
+
+    elif choice == 5:
+        linked_list.delete_first()
+
+    elif choice == 6:
+        linked_list.delete_last()
+
+    elif choice == 7:
+        try:
+            value = int(input("Enter the value to delete: "))
+            linked_list.delete_anynode(value)
+        except ValueError:
+            print("Invalid input! Please enter an integer.")
+
+    elif choice == 8:
+        linked_list.display()
+
+    elif choice == 9:
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid choice. Please enter a valid option.")
