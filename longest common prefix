@@ -1,0 +1,9 @@
+a=["car","carry","cab"]
+pre=a[0]
+for i in a[1:]:
+    while not i.startswith(pre):
+        pre=pre[:-1]
+        if not pre:
+            print("")
+
+pre
