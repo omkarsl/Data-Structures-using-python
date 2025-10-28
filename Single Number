@@ -1,0 +1,18 @@
+#bruteforce approach
+nums=[2,3,5,4,3,5,4]
+d={}
+for i in nums:
+    if i in d:
+        d[i]+=1
+    else:
+        d[i]=1
+
+print(min(d,key=d.get))
+
+#optimal solution using XOR
+nums=[2,3,5,4,3,5,4]
+result =0
+for num in nums:
+    result ^=num
+result
+        
