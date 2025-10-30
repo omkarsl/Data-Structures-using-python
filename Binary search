@@ -1,0 +1,18 @@
+a=[2,3,5,7,8,9]
+low=0
+high=len(a)-1
+k=7
+found=False
+while low<=high:
+    mid=(low+high)//2
+    if k>a[mid]:
+        low=mid+1
+    elif k==a[mid]:
+        print("found at",mid)
+        found=True
+        break
+   
+    else:
+        high=mid-1
+if not found:
+    print("not found")
