@@ -1,0 +1,12 @@
+s = "A man, a plan, a canal: Panama"
+clean=""
+for ch in s:
+    if ch.isalnum():
+        clean+=ch.lower()
+
+is_palindrome=True
+for i in range(len(clean)//2):
+    if clean[i]!=clean[-(i+1)]:
+        is_palindrome=False
+        break
+print(is_palindrome)
