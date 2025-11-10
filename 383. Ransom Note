@@ -1,0 +1,11 @@
+ransomNote = "aa"
+magazine = "aab"
+
+for ch in ransomNote:
+    if ch in magazine:
+        magazine = magazine.replace(ch, "", 1)
+    else:
+        print(False)
+        break
+else:
+    print(True)
