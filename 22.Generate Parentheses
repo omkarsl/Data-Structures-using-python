@@ -1,0 +1,22 @@
+from itertools import product
+
+class Solution:
+    def generateParenthesis(self, n: int):
+        def isValid(s):
+            balance = 0
+            for ch in s:
+                if ch == '(':
+                    balance += 1
+                else:
+                    balance -= 1
+                if balance < 0:  # more ')' than '(' at any point → invalid
+                    return False
+            return balance == 0  # balanced at the end
+
+        result = []
+        # Generate all possible 2n-length strings of '(' and ')'
+        for p in product("()", repeat=2*n):
+            s = "".join(p)
+            if isValid(s):
+                result.append(s)
+        return result
