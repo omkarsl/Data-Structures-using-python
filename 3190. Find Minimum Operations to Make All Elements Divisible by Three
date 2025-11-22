@@ -1,0 +1,7 @@
+nums=[1,2,3,4]
+count=0
+for i in range(len(nums)):
+    r=nums[i]%3
+    if r!=0:
+        count+=min(r,3-r)
+count
